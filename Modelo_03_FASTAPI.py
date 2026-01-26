@@ -8,8 +8,8 @@ import pandas as pd
 with open('pipeline_malware.pkl', 'rb') as archivo_modelo:
     modelo = pickle.load(archivo_modelo)
 
-with open('scaler.pkl', 'rb') as archivo_scaler:
-    scaler = pickle.load(archivo_scaler)
+#with open('scaler.pkl', 'rb') as archivo_scaler:
+#    scaler = pickle.load(archivo_scaler)
 
 # Definir las características esperadas
 columnas = [
@@ -47,11 +47,11 @@ async def predecir_malware(deteccion: Malware):
         datos_entrada = pd.DataFrame([deteccion.dict()], columns=columnas)
         
         # Escalar las características
-        datos_entrada_scaled = scaler.transform(datos_entrada)
+        #datos_entrada_scaled = scaler.transform(datos_entrada)
         
         # Realizar la predicción
-        prediccion = modelo.predict(datos_entrada_scaled)
-        probabilidad = modelo.predict_proba(datos_entrada_scaled)[:, 1]
+        prediccion = modelo.predict(datos_entrada)
+        probabilidad = modelo.predict_proba(datos_entrada)[:, 1]
         
         # Construir la respuesta
         resultado = {
