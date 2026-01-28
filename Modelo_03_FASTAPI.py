@@ -52,8 +52,8 @@ async def predecir_malware(deteccion: Malware):
         datos_entrada = datos_entrada[columnas]
 
         # Realizar la predicción
-        prediccion = modelo.predict(datos_entrada)
-        probabilidad = modelo.predict_proba(datos_entrada)[:, 1]
+        prediccion = modelo.predict(datos_entrada) # cambio
+        probabilidad = modelo.predict_proba(datos_entrada)[:, 1] #cambio
         
         # Construir la respuesta
         resultado = {
