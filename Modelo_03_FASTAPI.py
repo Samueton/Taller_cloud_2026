@@ -44,7 +44,7 @@ class Malware(BaseModel):
 async def predecir_malware(deteccion: Malware):
     try:
         # Convertir la entrada en un DataFrame
-        datos_entrada = pd.DataFrame([deteccion.dict()], columns=columnas)
+        datos_entrada = pd.DataFrame([deteccion.dict(by_alias=True)], columns=columnas)
         
         # Escalar las características
         #datos_entrada_scaled = scaler.transform(datos_entrada)
