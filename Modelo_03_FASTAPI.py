@@ -48,7 +48,9 @@ async def predecir_malware(deteccion: Malware):
         
         # Escalar las características
         #datos_entrada_scaled = scaler.transform(datos_entrada)
-        
+         # Asegurar orden correcto de columnas
+        datos_entrada = datos_entrada[columnas]
+
         # Realizar la predicción
         prediccion = modelo.predict(datos_entrada)
         probabilidad = modelo.predict_proba(datos_entrada)[:, 1]
