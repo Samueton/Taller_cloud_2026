@@ -10,7 +10,107 @@ La solución implementa un flujo completo de operacionalización de Data Science
 Dataset → Modelo ML → Exportación .pkl → API FastAPI → GitHub → Deploy Cloud → API LIVE
 
 
+#Descripción del Objetivo del modelo 
 
+📌 Descripción general
+
+    Este proyecto implementa un modelo de Machine Learning para la detección de malware a partir de métricas de tráfico de red. El objetivo es clasificar flujos de red como benignos o maliciosos (o entre múltiples clases) utilizando técnicas de preprocesamiento, reducción de dimensionalidad y un clasificador robusto basado en Random Forest.
+
+    El flujo completo está encapsulado en un pipeline de Scikit-learn, lo que garantiza consistencia entre entrenamiento, evaluación y uso en producción.
+
+🎯 Objetivo del modelo
+
+    Detectar comportamiento malicioso en tráfico de red mediante:
+
+    Análisis de métricas estadísticas de flujos (duración, bytes, paquetes, tiempos de inter-arribo, actividad e inactividad).
+
+    Aprendizaje supervisado sobre la variable objetivo Class.
+
+    Evaluación con métricas estándar de clasificación y curvas ROC.
+
+    Persistencia del modelo entrenado para reutilización.
+
+🧠 Enfoque de Machine Learning
+
+    El modelo sigue el siguiente pipeline:
+
+    Imputación de valores faltantes
+
+    Reemplaza valores NaN (incluidos infinitos) usando la media de cada variable.
+
+    Estandarización
+
+    Normaliza las variables numéricas (media 0, desviación estándar 1).
+
+    Reducción de dimensionalidad (PCA)
+
+    Conserva el 95% de la varianza explicada, reduciendo ruido y correlación entre variables.
+
+    Clasificación
+
+    Se utiliza un RandomForestClassifier con:
+
+    100 árboles
+
+    Balanceo automático de clases
+
+    Semilla fija para reproducibilidad
+
+
+📊 Variables utilizadas
+
+    El modelo trabaja exclusivamente con variables numéricas de tráfico de red, tales como:
+
+    Duración del flujo
+
+    Paquetes y bytes por segundo
+
+    Métricas de paquetes forward y backward
+
+    Tiempos de inter-arribo (IAT)
+
+    Periodos activos e inactivos del flujo
+
+    La variable objetivo es:
+
+    Class → tipo de tráfico 'benign' 'adware' 'malware'
+
+
+🧪 Evaluación del modelo
+
+    El dataset se divide en:
+
+        75% entrenamiento
+
+        25% prueba, manteniendo la proporción de clases (stratified split)
+
+    Se calculan las siguientes métricas:
+
+        Accuracy
+
+        Precision (weighted)
+
+        F1-Score (weighted)
+
+        ROC-AUC
+
+        Binario: curva ROC clásica
+
+        Multiclase: One-Vs-Rest (OvR)
+
+    Además, se generan:
+
+        Matriz de confusión
+
+        Curva ROC
+
+
+Estructura del proyecto
+
+    ├── dataset_malware.csv
+    ├── modelo_deteccion_malware.py
+    ├── pipeline_malware.pkl
+    ├── README.md
 ## Requisitos de Entorno
 
 ⚙️ Requisitos del entorno
